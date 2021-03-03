@@ -80,10 +80,12 @@ class WebClientTest : WordSpec() {
                         content { json(objectMapper.writeValueAsString(Greeting(message = "Hello John Smith!"))) }
                     }
 
-                log.loggingEvents.shouldContainAnyOf(listOf(
-                    debug("WebClient Request: {} {}", "GET", "http://localhost:$wireMockServerPort/api/get?id=1"),
-                    debug("WebClient Request Header: {}={}", "Content-Type", "application/json")
-                ))
+                log.loggingEvents.shouldContainAnyOf(
+                    listOf(
+                        debug("WebClient Request: {} {}", "GET", "http://localhost:$wireMockServerPort/api/get?id=1"),
+                        debug("WebClient Request Header: {}={}", "Content-Type", "application/json")
+                    )
+                )
             }
         }
     }
