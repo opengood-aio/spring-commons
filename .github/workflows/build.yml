@@ -1,0 +1,49 @@
+name: build
+# description:
+# - Runs Gradle build compiling source code and executing tests
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.gitignore'
+      - 'gradle.properties'
+      - 'LICENSE'
+      - 'README.md'
+
+jobs:
+  build:
+    name: Run Build
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'Create release')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build
+        uses: burrunan/gradle-cache-action@v1
+        with:
+          arguments: clean build
+          gradle-version: wrapper
+
+      - name: Codestyle
+        uses: fabiocapasso93/gha-kotlin-linter@v1.0
+
+      - name: Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./build/reports/jacoco/test/jacocoTestReport.xml
+          verbose: true
+
+      - name: FOSSA
+        uses: fossa-contrib/fossa-action@v1
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}

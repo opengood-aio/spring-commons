@@ -4,22 +4,19 @@ import io.opengood.commons.spring.function.logRequest
 import io.opengood.commons.spring.function.logResponse
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction
 import org.springframework.web.reactive.function.client.WebClient
-import reactor.core.publisher.Mono
 
-@TestConfiguration
+@Configuration
 class TestWebClientConfig {
 
     @Bean
-    fun testWebClient(): WebClient {
+    fun webClient(@Value("\${api.base-uri:http://localhost:8080}") apiBaseUri: String): WebClient {
         return WebClient.builder()
-            .baseUrl("http://localhost:9090")
+            .baseUrl(apiBaseUri)
             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .filters { exchangeFilterFunctions ->
                 exchangeFilterFunctions.add(logRequest(log))

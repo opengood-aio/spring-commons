@@ -1,0 +1,4 @@
+app:
+  properties:
+    foo: bar
+    baz: paz
