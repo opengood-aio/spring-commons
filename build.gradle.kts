@@ -1,7 +1,7 @@
 import io.opengood.gradle.enumeration.ProjectType
 
 plugins {
-    id("io.opengood.gradle.config") version "1.12.0"
+    id("io.opengood.gradle.config") version "1.16.0"
 }
 
 group = "io.opengood.commons"
