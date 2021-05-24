@@ -43,7 +43,7 @@ jobs:
           file: ./build/reports/jacoco/test/jacocoTestReport.xml
           verbose: true
 
-#      - name: FOSSA
-#        uses: fossa-contrib/fossa-action@v1
-#        with:
-#          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
+      - name: FOSSA
+        uses: fossas/fossa-action@v1
+        with:
+          api-key: ${{ secrets.FOSSA_API_KEY }}

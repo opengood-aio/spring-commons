@@ -1,7 +1,7 @@
 import io.opengood.gradle.enumeration.ProjectType
 
 plugins {
-    id("io.opengood.gradle.config") version "1.16.0"
+    id("io.opengood.gradle.config") version "1.22.0"
 }
 
 group = "io.opengood.commons"
@@ -18,7 +18,7 @@ opengood {
 object Versions {
     const val JACKSON_KOTLIN = "2.12.1"
     const val SLF4J_TEST = "1.2.0"
-    const val SPRING_CLOUD_CONTRACT_STUB_RUNNER = "3.0.1"
+    const val SPRING_CLOUD_CONTRACT_STUB_RUNNER = "3.0.2"
     const val WIREMOCK = "2.27.2"
 }
 
