@@ -39,14 +39,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+          distribution: 'adopt'
 
       - name: Run Release and Publish
         uses: burrunan/gradle-cache-action@v1
         with:
-          arguments: clean release -Prelease.useAutomaticVersion=true
+          arguments: clean release -PskipTests=true -Prelease.useAutomaticVersion=true
           gradle-version: wrapper
         env:
           GPG_SIGNING_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
           GPG_SIGNING_PRIVATE_KEY: ${{ secrets.GPG_SIGNING_PRIVATE_KEY }}
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          OSS_REPO_USERNAME: ${{ secrets.OSS_REPO_USERNAME }}
+          OSS_REPO_PASSWORD: ${{ secrets.OSS_REPO_PASSWORD }}

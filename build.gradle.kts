@@ -1,7 +1,7 @@
 import io.opengood.gradle.enumeration.ProjectType
 
 plugins {
-    id("io.opengood.gradle.config") version "1.22.0"
+    id("io.opengood.gradle.config")
 }
 
 group = "io.opengood.commons"
@@ -15,13 +15,6 @@ opengood {
     }
 }
 
-object Versions {
-    const val JACKSON_KOTLIN = "2.12.1"
-    const val SLF4J_TEST = "1.2.0"
-    const val SPRING_CLOUD_CONTRACT_STUB_RUNNER = "3.0.2"
-    const val WIREMOCK = "2.27.2"
-}
-
 configurations.forEach { config ->
     with(config) {
         exclude("ch.qos.logback")
@@ -29,11 +22,11 @@ configurations.forEach { config ->
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-web:_")
+    implementation("org.springframework.boot:spring-boot-starter-webflux:_")
 
-    testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.JACKSON_KOTLIN}")
-    testImplementation("com.github.tomakehurst:wiremock:${Versions.WIREMOCK}")
-    testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:${Versions.SPRING_CLOUD_CONTRACT_STUB_RUNNER}")
-    testImplementation("uk.org.lidalia:slf4j-test:${Versions.SLF4J_TEST}")
+    testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:_")
+    testImplementation("com.github.tomakehurst:wiremock:_")
+    testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:_")
+    testImplementation("uk.org.lidalia:slf4j-test:_")
 }
