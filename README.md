@@ -37,12 +37,49 @@ implementation("io.opengood.commons:spring-commons:VERSION")
 
 **Note:** All examples are provided in Kotlin
 
+### Reusable Spring Properties
+
+Common Spring properties are often referenced in code for importing
+configuration values. Rather than defining these constantly,
+simply refer to them as constants.
+
+| Constant | Spring Property |
+| --- | --- |
+`SpringProperties.APPLICATION_NAME` | `spring.application.name` |
+
+### Reusable Spring Property Placeholders
+
+Similarly, when using `@Value` to import Spring property values, one
+needs to wrap `${}` around the property. These are also provided as
+constants one can simply refer.
+
+| Constant | Spring Property Placeholder |
+| --- | --- |
+`SpringPropertyPlaceholders.APPLICATION_NAME` | `${spring.application.name}` |
+
+Example:
+
+```kotlin
+import io.opengood.commons.spring.constant.SpringPropertyPlaceholders
+
+@Configuration
+class AppConfig {
+    
+    @Bean
+    fun bean(@Value(SpringPropertyPlaceholders.APPLICATION_NAME) value: String): String {
+        // configure bean
+    }
+}
+```
+
 ### Reusable Spring Bean Properties
 
 Sometimes one needs to override Spring Beans and remembering the
 specific property is hard. A constant is provided to simplify this:
 
-`SpringBean.BEAN_OVERRIDE`
+| Constant | Spring Bean Property |
+| --- | --- |
+`SpringBean.BEAN_OVERRIDE` | `spring.main.allow-bean-definition-overriding=true` |
 
 Example:
 
