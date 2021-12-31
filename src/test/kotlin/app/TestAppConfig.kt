@@ -9,6 +9,5 @@ import org.springframework.context.annotation.Configuration
 class TestAppConfig {
 
     @Bean
-    fun objectMapper(): ObjectMapper =
-        jacksonObjectMapper()
+    fun objectMapper(): ObjectMapper = jacksonObjectMapper()
 }

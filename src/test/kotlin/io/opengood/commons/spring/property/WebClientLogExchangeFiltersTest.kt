@@ -1,7 +1,8 @@
-package io.opengood.commons.spring
+package io.opengood.commons.spring.property
 
 import app.Greeting
 import app.Person
+import app.TestAppConfig
 import app.TestApplication
 import app.TestWebClientConfig
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -9,7 +10,9 @@ import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.equalTo
 import com.github.tomakehurst.wiremock.client.WireMock.get
+import com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor
 import com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo
+import com.github.tomakehurst.wiremock.client.WireMock.verify
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.collections.shouldContainAnyOf
 import io.kotest.spring.SpringListener
@@ -29,14 +32,14 @@ import uk.org.lidalia.slf4jtest.LoggingEvent.debug
 import uk.org.lidalia.slf4jtest.TestLoggerFactory
 
 @SpringBootTest(
-    classes = [TestApplication::class],
+    classes = [TestAppConfig::class, TestApplication::class, TestWebClientConfig::class, WireMockServer::class],
     properties = [SpringBean.BEAN_OVERRIDE],
     webEnvironment = WebEnvironment.RANDOM_PORT
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
 @AutoConfigureWireMock(port = 0)
 @AutoConfigureMockMvc
-class WebClientTest : WordSpec() {
+class WebClientLogExchangeFiltersTest : WordSpec() {
 
     private val log = TestLoggerFactory.getTestLogger(TestWebClientConfig::class.java)
 
@@ -62,17 +65,17 @@ class WebClientTest : WordSpec() {
         "Service client accessing API endpoint" should {
             "Send request and service should call another API endpoint and log request and response data" {
                 wireMockServer.stubFor(
-                    get(urlPathEqualTo("/api/get"))
-                        .withQueryParam("id", equalTo("1"))
+                    get(urlPathEqualTo("/api/person"))
+                        .withQueryParam("firstName", equalTo("John"))
                         .willReturn(
                             aResponse()
                                 .withStatus(200)
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .withBody(objectMapper.writeValueAsString(Person(name = "John Smith")))
+                                .withBody(objectMapper.writeValueAsString(Person(firstName = "John", lastName = "Smith")))
                         )
                 )
 
-                mockMvc.get("/greeting/greet/1")
+                mockMvc.get("/greeting/John")
                     .andDo { print() }
                     .andExpect {
                         status { isOk() }
@@ -82,9 +85,15 @@ class WebClientTest : WordSpec() {
 
                 log.loggingEvents.shouldContainAnyOf(
                     listOf(
-                        debug("WebClient Request: {} {}", "GET", "http://localhost:$wireMockServerPort/api/get?id=1"),
+                        debug("WebClient Request: {} {}", "GET", "http://localhost:$wireMockServerPort/get?firstName=John"),
                         debug("WebClient Request Header: {}={}", "Content-Type", "application/json")
                     )
+                )
+
+                verify(
+                    getRequestedFor(urlPathEqualTo("/api/person"))
+                        .withQueryParam("firstName", equalTo("John"))
+                        .withHeader(HttpHeaders.CONTENT_TYPE, equalTo(MediaType.APPLICATION_JSON_VALUE))
                 )
             }
         }

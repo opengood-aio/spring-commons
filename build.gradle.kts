@@ -25,6 +25,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
+    // testImplementation("ch.qos.logback:logback-classic:_")
     testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:_")
     testImplementation("com.github.tomakehurst:wiremock:_")
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:_")

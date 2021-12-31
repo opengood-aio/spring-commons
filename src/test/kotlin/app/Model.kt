@@ -5,5 +5,6 @@ data class Greeting(
 )
 
 data class Person(
-    val name: String
+    val firstName: String,
+    val lastName: String
 )

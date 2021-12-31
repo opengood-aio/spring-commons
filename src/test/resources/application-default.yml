@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: test
+
+logging:
+  level:
+    com.github.tomakehurst.wiremock: DEBUG
+    org.reflections: false
+    reactor.netty.http.client.HttpClient: DEBUG
+
+spring-commons:
+  web-client:
+    logging:
+      enabled: true

@@ -1,4 +1,4 @@
-package io.opengood.commons.spring.function
+package io.opengood.commons.spring.webclient
 
 import org.slf4j.Logger
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction
