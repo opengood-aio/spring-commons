@@ -8,7 +8,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengoodio/spring-commons/master/LICENSE)
 [![FOSSA](https://app.fossa.com/api/projects/custom%2B22161%2Fgithub.com%2Fopengoodio%2Fspring-commons.svg?type=small)](https://app.fossa.com/projects/custom%2B22161%2Fgithub.com%2Fopengoodio%2Fspring-commons?ref=badge_small)
 
-Commons library containing reusable patterns, extensions, properties, beans, and objects for Spring and Spring Boot
+Commons library containing reusable patterns, extensions, properties, beans, and
+objects for Spring and Spring Boot
 
 ## Setup
 
@@ -39,8 +40,9 @@ implementation("io.opengood.commons:spring-commons:VERSION")
 
 ### Reusable Spring Properties
 
-Common Spring properties are often referenced in code for importing configuration values. Rather than defining these
-constantly, simply refer to them as constants.
+Common Spring properties are often referenced in code for importing
+configuration values. Rather than defining these constantly, simply refer to
+them as constants.
 
 | Constant | Spring Property |
 | --- | --- |
@@ -48,8 +50,9 @@ constantly, simply refer to them as constants.
 
 ### Reusable Spring Property Placeholders
 
-Similarly, when using `@Value` to import Spring property values, one needs to wrap `${}` around the property. These are
-also provided as constants one can simply refer.
+Similarly, when using `@Value` to import Spring property values, one needs to
+wrap `${}` around the property. These are also provided as constants one can
+simply refer.
 
 | Constant | Spring Property Placeholder |
 | --- | --- |
@@ -72,8 +75,8 @@ class AppConfig {
 
 ### Reusable Spring Bean Properties
 
-Sometimes one needs to override Spring Beans and remembering the specific property is hard. A constant is provided to
-simplify this:
+Sometimes one needs to override Spring Beans and remembering the specific
+property is hard. A constant is provided to simplify this:
 
 | Constant | Spring Bean Property |
 | --- | --- |
@@ -96,8 +99,8 @@ class ControllerTest : WordSpec() {
 
 ### WebClient Request and Response Loggers
 
-By default, using `WebClient` does not provide logging of request and response information. Functions are provided to
-simplify this:
+By default, using `WebClient` does not provide logging of request and response
+information. Functions are provided to simplify this:
 
 `logRequest` will log `debug`:
 
@@ -142,11 +145,12 @@ class WebClientConfig {
 
 ### Logging Web Client Builder
 
-When one needs to log details of Spring `WebClient` requests and responses, one can configure the Netty `HttpClient` to
-wiretap and log request and response details at level `DEBUG`.
+When one needs to log details of Spring `WebClient` requests and responses, one
+can configure the Netty `HttpClient` to wiretap and log request and response
+details at level `DEBUG`.
 
-A `loggingWebClientBuilder` Spring bean is provided that is auto configured when the following configuration is added
-to `application.yml`:
+A `loggingWebClientBuilder` Spring bean is provided that is auto configured when
+the following configuration is added to `application.yml`:
 
 ```yaml
 spring-commons:
@@ -180,7 +184,8 @@ logging:
     reactor.netty.http.client.HttpClient: DEBUG
 ```
 
-Any `WebClient` requests and responses using by the bean will be logged similar as follows:
+Any `WebClient` requests and responses used by the bean will be logged similar
+to as follows:
 
 ```text
 Request:
@@ -206,13 +211,15 @@ Server: Jetty(9.4.44.v20210927)
 0
 ```
 
-**Note:** This data should only be used for diagnostic purposes and should be disabled in production.
+**Note:** This data should only be used for diagnostic purposes and should be
+disabled in production.
 
 ### YAML Property Source Factory
 
-Spring supports turning YAML configuration files into properties beans but only for `application*.yml` files. Custom
-YAML files are not supported. To enable this, use the `YamlPropertySourceFactory` on
-`@ConfigurtionProperties` bean classes:
+Spring supports turning YAML configuration files into properties beans but only
+for `application*.yml` files. Custom YAML files are not supported. To enable
+this, use the `YamlPropertySourceFactory` on `@ConfigurtionProperties` bean
+classes:
 
 Example:
 

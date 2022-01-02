@@ -1,4 +1,4 @@
-package io.opengood.commons.spring.webclient
+package io.opengood.commons.spring.property
 
 import app.AppProperties
 import app.TestApplication
