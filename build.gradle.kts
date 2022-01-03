@@ -15,11 +15,11 @@ opengood {
     }
 }
 
-configurations.forEach { config ->
-    with(config) {
-        exclude("ch.qos.logback")
-    }
-}
+// configurations.forEach { config ->
+//     with(config) {
+//         exclude("ch.qos.logback")
+//     }
+// }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")

@@ -19,7 +19,7 @@ class LoggingWebClientConfig {
     fun loggingHttpClient(): HttpClient {
         log.info("Setup logging Netty HTTP client")
         return HttpClient.create()
-            .wiretap(this.javaClass.canonicalName, LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)
+            .wiretap("reactor.netty.http.client.HttpClient", LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)
     }
 
     @Bean("loggingWebClientBuilder")
