@@ -16,7 +16,7 @@ import io.kotest.core.annotation.EnabledIf
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
-import io.opengood.commons.spring.CiCondition
+import io.opengood.commons.spring.NotCiCondition
 import io.opengood.commons.spring.constant.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -35,7 +35,7 @@ import org.springframework.web.reactive.function.client.WebClient
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
 @AutoConfigureWireMock(port = 0)
-@EnabledIf(CiCondition::class)
+@EnabledIf(NotCiCondition::class)
 class LoggingWebClientConfigTest : WordSpec() {
 
     @Autowired

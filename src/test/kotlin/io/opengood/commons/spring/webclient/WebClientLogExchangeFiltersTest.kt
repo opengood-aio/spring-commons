@@ -17,7 +17,7 @@ import io.kotest.core.annotation.EnabledIf
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.collections.shouldContainAnyOf
-import io.opengood.commons.spring.CiCondition
+import io.opengood.commons.spring.NotCiCondition
 import io.opengood.commons.spring.constant.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -41,7 +41,7 @@ import uk.org.lidalia.slf4jtest.TestLoggerFactory
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
 @AutoConfigureWireMock(port = 0)
 @AutoConfigureMockMvc
-@EnabledIf(CiCondition::class)
+@EnabledIf(NotCiCondition::class)
 class WebClientLogExchangeFiltersTest : WordSpec() {
 
     private val log = TestLoggerFactory.getTestLogger(TestWebClientConfig::class.java)

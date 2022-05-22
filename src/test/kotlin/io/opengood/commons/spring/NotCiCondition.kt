@@ -4,8 +4,12 @@ import io.kotest.core.annotation.EnabledCondition
 import io.kotest.core.spec.Spec
 import kotlin.reflect.KClass
 
-class CiCondition : EnabledCondition {
+class NotCiCondition : EnabledCondition {
 
     override fun enabled(kclass: KClass<out Spec>): Boolean =
-        System.getenv()["CI"] == "true"
+        !System.getenv().containsKey(CI) || System.getenv()[CI] != "true"
+
+    companion object {
+        const val CI = "CI"
+    }
 }
