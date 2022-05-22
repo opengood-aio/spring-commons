@@ -4,8 +4,8 @@ import app.TestAppConfig
 import app.TestApplication
 import app.TestWebClientConfig
 import io.kotest.core.spec.style.WordSpec
+import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.booleans.shouldBeTrue
-import io.kotest.spring.SpringListener
 import io.opengood.commons.spring.constant.SpringBean
 import io.opengood.commons.spring.webclient.LoggingWebClientConfig
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +23,7 @@ class SpringCommonsConfigTest : WordSpec() {
     @Autowired
     lateinit var applicationContext: ApplicationContext
 
-    override fun listeners() = listOf(SpringListener)
+    override fun extensions() = listOf(SpringExtension)
 
     init {
         "Spring Commons configuration" should {

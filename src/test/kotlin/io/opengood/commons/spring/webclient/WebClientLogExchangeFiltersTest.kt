@@ -14,8 +14,8 @@ import com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor
 import com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo
 import com.github.tomakehurst.wiremock.client.WireMock.verify
 import io.kotest.core.spec.style.WordSpec
+import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.collections.shouldContainAnyOf
-import io.kotest.spring.SpringListener
 import io.opengood.commons.spring.constant.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -55,7 +55,7 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
     @Autowired
     lateinit var mockMvc: MockMvc
 
-    override fun listeners() = listOf(SpringListener)
+    override fun extensions() = listOf(SpringExtension)
 
     init {
         afterEach {
@@ -71,7 +71,14 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
                             aResponse()
                                 .withStatus(200)
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .withBody(objectMapper.writeValueAsString(Person(firstName = "John", lastName = "Smith")))
+                                .withBody(
+                                    objectMapper.writeValueAsString(
+                                        Person(
+                                            firstName = "John",
+                                            lastName = "Smith"
+                                        )
+                                    )
+                                )
                         )
                 )
 
@@ -85,7 +92,11 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
 
                 log.loggingEvents.shouldContainAnyOf(
                     listOf(
-                        debug("WebClient Request: {} {}", "GET", "http://localhost:$wireMockServerPort/get?firstName=John"),
+                        debug(
+                            "WebClient Request: {} {}",
+                            "GET",
+                            "http://localhost:$wireMockServerPort/get?firstName=John"
+                        ),
                         debug("WebClient Request Header: {}={}", "Content-Type", "application/json")
                     )
                 )
