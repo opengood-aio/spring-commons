@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class TestWebClientConfig(
-    @Value("\${api.base-uri:http://localhost:8098}") private val apiBaseUri: String
+    @Value("\${api.base-uri:http://localhost:8080}") private val apiBaseUri: String
 ) {
 
     @Bean("logExchangeFiltersWebClient")
