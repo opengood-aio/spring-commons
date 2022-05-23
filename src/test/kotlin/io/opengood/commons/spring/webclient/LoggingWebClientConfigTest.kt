@@ -32,7 +32,7 @@ import org.springframework.web.reactive.function.client.WebClient
     webEnvironment = WebEnvironment.RANDOM_PORT
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
-@AutoConfigureWireMock(port = 0)
+@AutoConfigureWireMock(port = 8099)
 class LoggingWebClientConfigTest : WordSpec() {
 
     @Autowired

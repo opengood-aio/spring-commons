@@ -37,7 +37,7 @@ import uk.org.lidalia.slf4jtest.TestLoggerFactory
     webEnvironment = WebEnvironment.RANDOM_PORT
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
-@AutoConfigureWireMock(port = 0)
+@AutoConfigureWireMock(port = 8098)
 @AutoConfigureMockMvc
 class WebClientLogExchangeFiltersTest : WordSpec() {
 
