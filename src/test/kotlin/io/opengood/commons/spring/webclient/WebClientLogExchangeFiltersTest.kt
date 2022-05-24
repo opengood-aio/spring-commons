@@ -7,6 +7,7 @@ import app.TestApplication
 import app.TestWebClientConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.WireMockServer
+import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.equalTo
 import com.github.tomakehurst.wiremock.client.WireMock.get
@@ -64,6 +65,8 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
 
         "Service client accessing API endpoint" should {
             "Send request and service should call another API endpoint and log request and response data" {
+                WireMock.configureFor("localhost", wireMockServer.port())
+
                 wireMockServer.stubFor(
                     get(urlPathEqualTo("/api/person"))
                         .withQueryParam("firstName", equalTo("John"))
