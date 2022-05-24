@@ -6,6 +6,7 @@ import app.TestApplication
 import app.TestWebClientConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.WireMockServer
+import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMock.aResponse
 import com.github.tomakehurst.wiremock.client.WireMock.equalTo
 import com.github.tomakehurst.wiremock.client.WireMock.get
@@ -51,6 +52,8 @@ class LoggingWebClientConfigTest : WordSpec() {
         "Service client accessing API endpoint" should {
             "Send request and service should call another API endpoint and log request and response data" {
                 val expected = Person(firstName = "John", lastName = "Smith")
+
+                WireMock.configureFor("localhost", wireMockServer.port())
 
                 wireMockServer.stubFor(
                     get(urlPathEqualTo("/greeting"))
