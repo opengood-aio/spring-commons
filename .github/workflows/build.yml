@@ -15,5 +15,7 @@ on:
 jobs:
   build:
     uses: opengoodio/central-workflows/.github/workflows/gradle-lib-build.yml@main
+    with:
+      run-gradle-validation: true
     secrets:
       fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
