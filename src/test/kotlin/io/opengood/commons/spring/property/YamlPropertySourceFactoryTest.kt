@@ -1,7 +1,7 @@
 package io.opengood.commons.spring.property
 
-import app.AppProperties
 import app.TestApplication
+import app.property.AppProperties
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe

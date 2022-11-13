@@ -1,5 +1,7 @@
-package app
+package app.controller
 
+import app.model.Greeting
+import app.model.Person
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

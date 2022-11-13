@@ -1,4 +1,4 @@
-package app
+package app.config
 
 import io.opengood.commons.spring.webclient.logRequest
 import io.opengood.commons.spring.webclient.logResponse

@@ -1,9 +1,9 @@
 package io.opengood.commons.spring.webclient
 
-import app.Person
-import app.TestAppConfig
 import app.TestApplication
-import app.TestWebClientConfig
+import app.config.TestAppConfig
+import app.config.TestWebClientConfig
+import app.model.Person
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock

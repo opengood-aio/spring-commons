@@ -1,8 +1,8 @@
 package io.opengood.commons.spring
 
-import app.TestAppConfig
 import app.TestApplication
-import app.TestWebClientConfig
+import app.config.TestAppConfig
+import app.config.TestWebClientConfig
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.booleans.shouldBeFalse

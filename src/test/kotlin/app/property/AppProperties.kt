@@ -1,4 +1,4 @@
-package app
+package app.property
 
 import io.opengood.commons.spring.property.YamlPropertySourceFactory
 import org.springframework.boot.context.properties.ConfigurationProperties

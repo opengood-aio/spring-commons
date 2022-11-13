@@ -1,8 +1,4 @@
-package app
-
-data class Greeting(
-    val message: String
-)
+package app.model
 
 data class Person(
     val firstName: String,
