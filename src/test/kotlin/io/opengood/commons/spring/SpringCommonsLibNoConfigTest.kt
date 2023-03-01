@@ -15,12 +15,17 @@ import org.springframework.context.ApplicationContext
 import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest(
-    classes = [LoggingWebClientConfig::class, TestAppConfig::class, TestApplication::class, TestWebClientConfig::class],
+    classes = [
+        LoggingWebClientConfig::class,
+        TestAppConfig::class,
+        TestApplication::class,
+        TestWebClientConfig::class,
+    ],
     properties = [SpringBean.BEAN_OVERRIDE],
-    webEnvironment = WebEnvironment.RANDOM_PORT
+    webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 @ActiveProfiles("none")
-class SpringCommonsNoConfigTest : WordSpec() {
+class SpringCommonsLibNoConfigTest : WordSpec() {
 
     @Autowired
     lateinit var applicationContext: ApplicationContext

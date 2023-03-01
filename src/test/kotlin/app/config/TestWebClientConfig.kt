@@ -13,10 +13,10 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class TestWebClientConfig(
-    @Value("\${api.base-uri:http://localhost:8080}") private val apiBaseUri: String
+    @Value("\${api.base-uri:http://localhost:8080}") private val apiBaseUri: String,
 ) {
 
-    @Bean("logExchangeFiltersWebClient")
+    @Bean
     fun logExchangeFiltersWebClient() =
         WebClient.builder()
             .baseUrl(apiBaseUri)
@@ -27,9 +27,9 @@ class TestWebClientConfig(
             }
             .build()
 
-    @Bean("loggingWebClient")
+    @Bean
     fun loggingWebClient(
-        @Qualifier("loggingWebClientBuilder") webClientBuilder: WebClient.Builder?
+        @Qualifier("loggingWebClientBuilder") webClientBuilder: WebClient.Builder?,
     ) =
         webClientBuilder
             ?.baseUrl(apiBaseUri)

@@ -26,7 +26,7 @@ class YamlPropertySourceFactoryTest : WordSpec() {
 
                             properties shouldBe mapOf(
                                 "foo" to "bar",
-                                "baz" to "paz"
+                                "baz" to "paz",
                             )
                         }
                     }

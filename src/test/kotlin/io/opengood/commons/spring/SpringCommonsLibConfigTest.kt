@@ -14,11 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.context.ApplicationContext
 
 @SpringBootTest(
-    classes = [LoggingWebClientConfig::class, TestAppConfig::class, TestApplication::class, TestWebClientConfig::class],
+    classes = [
+        LoggingWebClientConfig::class,
+        TestAppConfig::class,
+        TestApplication::class,
+        TestWebClientConfig::class,
+    ],
     properties = [SpringBean.BEAN_OVERRIDE],
-    webEnvironment = WebEnvironment.RANDOM_PORT
+    webEnvironment = WebEnvironment.RANDOM_PORT,
 )
-class SpringCommonsConfigTest : WordSpec() {
+class SpringCommonsLibConfigTest : WordSpec() {
 
     @Autowired
     lateinit var applicationContext: ApplicationContext

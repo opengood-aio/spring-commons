@@ -28,9 +28,15 @@ import org.springframework.test.context.TestPropertySource
 import org.springframework.web.reactive.function.client.WebClient
 
 @SpringBootTest(
-    classes = [LoggingWebClientConfig::class, TestAppConfig::class, TestApplication::class, TestWebClientConfig::class, WireMockServer::class],
+    classes = [
+        LoggingWebClientConfig::class,
+        TestAppConfig::class,
+        TestApplication::class,
+        TestWebClientConfig::class,
+        WireMockServer::class,
+    ],
     properties = [SpringBean.BEAN_OVERRIDE],
-    webEnvironment = WebEnvironment.RANDOM_PORT
+    webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
 @AutoConfigureWireMock(port = 0)
@@ -62,8 +68,8 @@ class LoggingWebClientConfigTest : WordSpec() {
                             aResponse()
                                 .withStatus(200)
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .withBody(objectMapper.writeValueAsString(expected))
-                        )
+                                .withBody(objectMapper.writeValueAsString(expected)),
+                        ),
                 )
 
                 val response = webClient.get()
@@ -81,7 +87,7 @@ class LoggingWebClientConfigTest : WordSpec() {
 
                 verify(
                     getRequestedFor(urlPathEqualTo("/greeting"))
-                        .withHeader(HttpHeaders.CONTENT_TYPE, equalTo(MediaType.APPLICATION_JSON_VALUE))
+                        .withHeader(HttpHeaders.CONTENT_TYPE, equalTo(MediaType.APPLICATION_JSON_VALUE)),
                 )
             }
         }

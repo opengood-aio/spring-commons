@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient
 @RestController
 @RequestMapping("/greeting")
 class Controller(
-    @Qualifier("logExchangeFiltersWebClient") val webClient: WebClient
+    @Qualifier("logExchangeFiltersWebClient") val webClient: WebClient,
 ) {
 
     @GetMapping("/{firstName}")

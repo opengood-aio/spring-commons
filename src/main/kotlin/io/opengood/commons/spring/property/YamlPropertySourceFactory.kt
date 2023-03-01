@@ -20,5 +20,5 @@ class YamlPropertySourceFactory : PropertySourceFactory {
     }
 
     private fun getResourceName(name: String?, resource: EncodedResource) =
-        if (name != null && name.isNotBlank()) name else resource.resource.filename!!
+        if (!name.isNullOrBlank()) name else resource.resource.filename!!
 }

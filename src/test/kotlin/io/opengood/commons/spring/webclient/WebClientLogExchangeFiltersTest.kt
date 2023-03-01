@@ -5,6 +5,7 @@ import app.config.TestAppConfig
 import app.config.TestWebClientConfig
 import app.model.Greeting
 import app.model.Person
+import ch.qos.logback.classic.Logger
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
@@ -14,10 +15,12 @@ import com.github.tomakehurst.wiremock.client.WireMock.get
 import com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor
 import com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo
 import com.github.tomakehurst.wiremock.client.WireMock.verify
+import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.collections.shouldContainAnyOf
 import io.opengood.commons.spring.constant.SpringBean
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -29,20 +32,22 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
-import uk.org.lidalia.slf4jtest.LoggingEvent.debug
-import uk.org.lidalia.slf4jtest.TestLoggerFactory
+import test.TestAppender
 
 @SpringBootTest(
-    classes = [TestAppConfig::class, TestApplication::class, TestWebClientConfig::class, WireMockServer::class],
+    classes = [
+        TestAppConfig::class,
+        TestApplication::class,
+        TestWebClientConfig::class,
+        WireMockServer::class,
+    ],
     properties = [SpringBean.BEAN_OVERRIDE],
-    webEnvironment = WebEnvironment.RANDOM_PORT
+    webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
 @AutoConfigureWireMock(port = 0)
 @AutoConfigureMockMvc
 class WebClientLogExchangeFiltersTest : WordSpec() {
-
-    private val log = TestLoggerFactory.getTestLogger(TestWebClientConfig::class.java)
 
     @Value("\${wiremock.server.port}")
     var wireMockServerPort: Int = 0
@@ -59,12 +64,12 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
     override fun extensions() = listOf(SpringExtension)
 
     init {
-        afterEach {
-            TestLoggerFactory.clear()
-        }
-
         "Service client accessing API endpoint" should {
             "Send request and service should call another API endpoint and log request and response data" {
+                val testAppender = TestAppender()
+                log.addAppender(testAppender)
+                testAppender.start()
+
                 WireMock.configureFor("localhost", wireMockServer.port())
 
                 wireMockServer.stubFor(
@@ -78,11 +83,11 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
                                     objectMapper.writeValueAsString(
                                         Person(
                                             firstName = "John",
-                                            lastName = "Smith"
-                                        )
-                                    )
-                                )
-                        )
+                                            lastName = "Smith",
+                                        ),
+                                    ),
+                                ),
+                        ),
                 )
 
                 mockMvc.get("/greeting/John")
@@ -93,23 +98,34 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
                         content { json(objectMapper.writeValueAsString(Greeting(message = "Hello John Smith!"))) }
                     }
 
-                log.loggingEvents.shouldContainAnyOf(
-                    listOf(
-                        debug(
-                            "WebClient Request: {} {}",
-                            "GET",
-                            "http://localhost:$wireMockServerPort/get?firstName=John"
-                        ),
-                        debug("WebClient Request Header: {}={}", "Content-Type", "application/json")
-                    )
-                )
+                val lastLoggedEvent = testAppender.lastLoggedEvent()
+                require(lastLoggedEvent != null) {
+                    "There are no log events appended"
+                }
+
+                assertSoftly {
+                    with(testAppender) {
+                        events.map { it.formattedMessage } shouldContainAnyOf
+                            listOf(
+                                "WebClient Request: GET http://localhost:$wireMockServerPort/api/person?firstName=John",
+                                "WebClient Request Header: Content-Type=application/json",
+                                "WebClient Response Status Code: 200 OK",
+                                "WebClient Response Header: Content-Type=application/json",
+                            )
+                    }
+                }
 
                 verify(
                     getRequestedFor(urlPathEqualTo("/api/person"))
                         .withQueryParam("firstName", equalTo("John"))
-                        .withHeader(HttpHeaders.CONTENT_TYPE, equalTo(MediaType.APPLICATION_JSON_VALUE))
+                        .withHeader(HttpHeaders.CONTENT_TYPE, equalTo(MediaType.APPLICATION_JSON_VALUE)),
                 )
             }
         }
+    }
+
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val log = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME) as Logger
     }
 }

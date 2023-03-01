@@ -11,6 +11,11 @@
 Commons library containing reusable patterns, extensions, properties, beans, and
 objects for Spring and Spring Boot
 
+## Compatibility
+
+* Java 17
+* Spring Boot 3
+
 ## Setup
 
 ### Add Dependency
@@ -44,9 +49,9 @@ Common Spring properties are often referenced in code for importing
 configuration values. Rather than defining these constantly, simply refer to
 them as constants.
 
-| Constant | Spring Property |
-| --- | --- |
-`SpringProperties.APPLICATION_NAME` | `spring.application.name` |
+| Constant                            | Spring Property           |
+|-------------------------------------|---------------------------|
+| `SpringProperties.APPLICATION_NAME` | `spring.application.name` |
 
 ### Reusable Spring Property Placeholders
 
@@ -54,9 +59,9 @@ Similarly, when using `@Value` to import Spring property values, one needs to
 wrap `${}` around the property. These are also provided as constants one can
 simply refer.
 
-| Constant | Spring Property Placeholder |
-| --- | --- |
-`SpringPropertyPlaceholders.APPLICATION_NAME` | `${spring.application.name}` |
+| Constant                                      | Spring Property Placeholder  |
+|-----------------------------------------------|------------------------------|
+ `SpringPropertyPlaceholders.APPLICATION_NAME` | `${spring.application.name}` |
 
 Example:
 
@@ -78,9 +83,9 @@ class AppConfig {
 Sometimes one needs to override Spring Beans and remembering the specific
 property is hard. A constant is provided to simplify this:
 
-| Constant | Spring Bean Property |
-| --- | --- |
-`SpringBean.BEAN_OVERRIDE` | `spring.main.allow-bean-definition-overriding=true` |
+| Constant                   | Spring Bean Property                                |
+|----------------------------|-----------------------------------------------------|
+ `SpringBean.BEAN_OVERRIDE` | `spring.main.allow-bean-definition-overriding=true` |
 
 Example:
 
@@ -128,7 +133,10 @@ class WebClientConfig {
     fun webClient(): WebClient {
         return WebClient.builder()
             .baseUrl("http://localhost:8080")
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .defaultHeader(
+                HttpHeaders.CONTENT_TYPE,
+                MediaType.APPLICATION_JSON_VALUE
+            )
             .filters { exchangeFilterFunctions ->
                 exchangeFilterFunctions.add(logRequest(log))
                 exchangeFilterFunctions.add(logResponse(log))
@@ -170,7 +178,10 @@ class TestWebClientConfig {
     ) =
         webClientBuilder
             .baseUrl("http://localhost:8080")
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .defaultHeader(
+                HttpHeaders.CONTENT_TYPE,
+                MediaType.APPLICATION_JSON_VALUE
+            )
             .build()
 }
 ```
@@ -229,7 +240,10 @@ import io.opengood.commons.spring.property.YamlPropertySourceFactory
 @Configuration
 @ConfigurationProperties(prefix = "app")
 @ConstructorBinding
-@PropertySource(value = ["classpath:app-properties.yml"], factory = YamlPropertySourceFactory::class)
+@PropertySource(
+    value = ["classpath:app-properties.yml"],
+    factory = YamlPropertySourceFactory::class
+)
 data class AppProperties(
     val properties: Map<String, String> = HashMap()
 )

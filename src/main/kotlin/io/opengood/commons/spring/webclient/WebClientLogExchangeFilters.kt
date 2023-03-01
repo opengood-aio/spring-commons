@@ -17,7 +17,7 @@ fun logRequest(log: Logger): ExchangeFilterFunction =
 
 fun logResponse(log: Logger): ExchangeFilterFunction =
     ExchangeFilterFunction.ofResponseProcessor { clientResponse ->
-        log.debug("WebClient Response: {}", clientResponse.rawStatusCode())
+        log.debug("WebClient Response Status Code: {}", clientResponse.statusCode())
         clientResponse.headers().asHttpHeaders().forEach { name, values ->
             values.forEach { value ->
                 log.debug("WebClient Response Header: {}={}", name, value)
