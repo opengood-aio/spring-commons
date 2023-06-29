@@ -61,7 +61,7 @@ simply refer.
 
 | Constant                                      | Spring Property Placeholder  |
 |-----------------------------------------------|------------------------------|
- `SpringPropertyPlaceholders.APPLICATION_NAME` | `${spring.application.name}` |
+| `SpringPropertyPlaceholders.APPLICATION_NAME` | `${spring.application.name}` |
 
 Example:
 
@@ -85,7 +85,7 @@ property is hard. A constant is provided to simplify this:
 
 | Constant                   | Spring Bean Property                                |
 |----------------------------|-----------------------------------------------------|
- `SpringBean.BEAN_OVERRIDE` | `spring.main.allow-bean-definition-overriding=true` |
+| `SpringBean.BEAN_OVERRIDE` | `spring.main.allow-bean-definition-overriding=true` |
 
 Example:
 

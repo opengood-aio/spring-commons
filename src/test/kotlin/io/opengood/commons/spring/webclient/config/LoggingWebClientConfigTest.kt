@@ -1,4 +1,4 @@
-package io.opengood.commons.spring.webclient
+package io.opengood.commons.spring.webclient.config
 
 import app.TestApplication
 import app.config.TestAppConfig
@@ -56,7 +56,7 @@ class LoggingWebClientConfigTest : WordSpec() {
 
     init {
         "Service client accessing API endpoint" should {
-            "Send request and service should call another API endpoint and log request and response data" {
+            "Send request to API endpoint and log request and response data" {
                 val expected = Person(firstName = "John", lastName = "Smith")
 
                 WireMock.configureFor("localhost", wireMockServer.port())

@@ -6,8 +6,10 @@ import app.config.TestWebClientConfig
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.booleans.shouldBeFalse
+import io.opengood.commons.spring.bean.refresh.BeanRefresher
+import io.opengood.commons.spring.bean.refresh.controller.BeanRefreshController
 import io.opengood.commons.spring.constant.SpringBean
-import io.opengood.commons.spring.webclient.LoggingWebClientConfig
+import io.opengood.commons.spring.webclient.config.LoggingWebClientConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
@@ -16,6 +18,8 @@ import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest(
     classes = [
+        BeanRefresher::class,
+        BeanRefreshController::class,
         LoggingWebClientConfig::class,
         TestAppConfig::class,
         TestApplication::class,
@@ -35,6 +39,8 @@ class SpringCommonsLibNoConfigTest : WordSpec() {
     init {
         "Spring Commons configuration" should {
             "Not configure Spring beans when properties are not populated in application configuration" {
+                applicationContext.containsBean("beanRefreshController").shouldBeFalse()
+                applicationContext.containsBean("beanRefresher").shouldBeFalse()
                 applicationContext.containsBean("loggingHttpClient").shouldBeFalse()
                 applicationContext.containsBean("loggingWebClientBuilder").shouldBeFalse()
             }

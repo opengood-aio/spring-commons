@@ -9,6 +9,9 @@ logging:
     reactor.netty.http.client.HttpClient: DEBUG
 
 spring-commons:
+  bean:
+    refresh:
+      enabled: true
   web-client:
     logging:
       enabled: true

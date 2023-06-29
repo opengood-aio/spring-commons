@@ -1,4 +1,4 @@
-package io.opengood.commons.spring.webclient
+package io.opengood.commons.spring.webclient.config
 
 import io.netty.handler.logging.LogLevel
 import org.slf4j.LoggerFactory

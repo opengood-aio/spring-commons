@@ -65,7 +65,7 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
 
     init {
         "Service client accessing API endpoint" should {
-            "Send request and service should call another API endpoint and log request and response data" {
+            "Send request to API endpoint and log request and response data" {
                 val testAppender = TestAppender()
                 log.addAppender(testAppender)
                 testAppender.start()
@@ -125,7 +125,6 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
     }
 
     companion object {
-        @Suppress("JAVA_CLASS_ON_COMPANION")
         private val log = LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME) as Logger
     }
 }
