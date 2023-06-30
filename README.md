@@ -43,8 +43,6 @@ implementation("io.opengood.commons:spring-commons:VERSION")
 
 **Note:** All examples are provided in Kotlin
 
----
-
 ### Reusable Spring Properties
 
 Common Spring properties are often referenced in code for importing
