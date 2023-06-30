@@ -43,6 +43,8 @@ implementation("io.opengood.commons:spring-commons:VERSION")
 
 **Note:** All examples are provided in Kotlin
 
+---
+
 ### Reusable Spring Properties
 
 Common Spring properties are often referenced in code for importing
@@ -52,6 +54,8 @@ them as constants.
 | Constant                            | Spring Property           |
 |-------------------------------------|---------------------------|
 | `SpringProperties.APPLICATION_NAME` | `spring.application.name` |
+
+---
 
 ### Reusable Spring Property Placeholders
 
@@ -78,6 +82,8 @@ class AppConfig {
 }
 ```
 
+---
+
 ### Reusable Spring Bean Properties
 
 Sometimes one needs to override Spring Beans and remembering the specific
@@ -101,6 +107,42 @@ class ControllerTest : WordSpec() {
     // do stuff
 }
 ```
+
+---
+
+### Bean Refresher
+
+**EXPERIMENTAL**
+
+Sometimes one needs to dynamically refresh a Spring bean at runtime without
+restarting the application container. For example, a Spring bean may need to
+fetch updated data from a database and cache the results inside a bean.
+
+The `BeanRefresher` component allows one to specify a bean name and its fully
+qualified class type to trigger a refresh of a bean without restarting the
+application container. On the next request for dependencies that use the bean,
+the updated instance will be injected.
+
+A REST controller endpoint is provided to allow programmatic refresh of Spring
+beans:
+
+**Request:**
+
+```http request
+POST http://localhost:8080/spring-commons/bean/refresh
+Accept: application/json
+Content-Type: application/json
+
+{"beanName":"greetingBean", "classType":"app.bean.GreetingBean"}
+```
+
+**Response:**
+
+```http request
+{"message":"Successfully refreshed bean 'greetingBean'"}
+```
+
+---
 
 ### WebClient Request and Response Loggers
 
@@ -151,6 +193,8 @@ class WebClientConfig {
 }
 ```
 
+---
+
 ### Logging Web Client Builder
 
 When one needs to log details of Spring `WebClient` requests and responses, one
@@ -198,18 +242,20 @@ logging:
 Any `WebClient` requests and responses used by the bean will be logged similar
 to as follows:
 
-```text
-Request:
+**Request:**
 
+```http request
 15:27:02.060 [qtp1001320766-66] DEBUG org.eclipse.jetty.server.HttpChannel MDC= - REQUEST for //localhost:11729/greeting?firstName=John on HttpChannelOverHttp@34998901{s=HttpChannelState@22052be6{s=IDLE rs=BLOCKING os=OPEN is=IDLE awp=false se=false i=true al=0},r=1,c=false/false,a=IDLE,uri=//localhost:11729/greeting?firstName=John,age=0}
 GET //localhost:11729/greeting?firstName=John HTTP/1.1
 User-Agent: ReactorNetty/1.0.14
 Host: localhost:11729
 Accept: */*
 Content-Type: application/json
+```
 
-Response:
+**Response:**
 
+```http request
 15:27:02.152 [reactor-http-nio-2] DEBUG i.o.c.s.w.LoggingWebClientConfig$$EnhancerBySpringCGLIB$$498409ee MDC= - [affd975a-1, L:/127.0.0.1:63371 - R:localhost/127.0.0.1:11729] READ: 252B HTTP/1.1 200 OK
 Content-Type: application/json
 Matched-Stub-Id: 62600bcd-4064-40a7-8547-bdc3af2577b5
@@ -224,6 +270,8 @@ Server: Jetty(9.4.44.v20210927)
 
 **Note:** This data should only be used for diagnostic purposes and should be
 disabled in production.
+
+---
 
 ### YAML Property Source Factory
 

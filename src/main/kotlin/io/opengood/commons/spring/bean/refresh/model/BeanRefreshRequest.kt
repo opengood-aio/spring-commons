@@ -1,6 +1,6 @@
 package io.opengood.commons.spring.bean.refresh.model
 
 data class BeanRefreshRequest(
-    val beanId: String,
+    val beanName: String,
     val classType: String,
 )

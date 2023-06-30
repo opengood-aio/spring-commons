@@ -12,6 +12,8 @@ spring-commons:
   bean:
     refresh:
       enabled: true
+      controller:
+        enabled: true
   web-client:
     logging:
       enabled: true

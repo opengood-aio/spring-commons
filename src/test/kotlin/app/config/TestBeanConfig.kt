@@ -9,6 +9,10 @@ import kotlin.random.Random
 class TestBeanConfig {
 
     @Bean
-    fun greeting() =
-        Greeting("Hello John Smith! Your number is ${Random.nextInt(0, 100)}")
+    fun greetingNumber() =
+        Random.nextInt(0, 100)
+
+    @Bean
+    fun greeting(greetingNumber: Int) =
+        Greeting("Hello John Smith! Your number is $greetingNumber")
 }
