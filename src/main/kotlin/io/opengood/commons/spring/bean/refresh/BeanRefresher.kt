@@ -19,7 +19,7 @@ class BeanRefresher(private val applicationContext: ApplicationContext) {
         if (beanRegistry.containsBeanDefinition(config.beanName)) {
             val oldBeanDefinition = beanRegistry.getBeanDefinition(config.beanName)
             try {
-                val newBeanDefinition = BeanDefinitionBuilder.rootBeanDefinition(config.classType.java).beanDefinition
+                val newBeanDefinition = BeanDefinitionBuilder.rootBeanDefinition(config.classType).beanDefinition
                 if (oldBeanDefinition.resolvableType == newBeanDefinition.resolvableType) {
                     beanRegistry.removeBeanDefinition(config.beanName)
                     beanRegistry.registerBeanDefinition(config.beanName, newBeanDefinition)

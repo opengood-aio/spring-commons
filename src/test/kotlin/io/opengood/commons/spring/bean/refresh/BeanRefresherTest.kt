@@ -39,7 +39,7 @@ class BeanRefresherTest : WordSpec() {
 
                 val config = BeanRefreshConfig(
                     beanName = "greetingBean",
-                    classType = GreetingBean::class,
+                    classType = GreetingBean::class.java,
                 )
 
                 beanRefresher.refresh(config)
@@ -54,7 +54,7 @@ class BeanRefresherTest : WordSpec() {
 
                 val config = BeanRefreshConfig(
                     beanName = "greetingBean1",
-                    classType = String::class,
+                    classType = String::class.java,
                 )
 
                 beanRefresher.refresh(config)
@@ -69,7 +69,7 @@ class BeanRefresherTest : WordSpec() {
 
                 val config = BeanRefreshConfig(
                     beanName = "greetingBean",
-                    classType = SpringBean::class,
+                    classType = SpringBean::class.java,
                 )
 
                 beanRefresher.refresh(config)

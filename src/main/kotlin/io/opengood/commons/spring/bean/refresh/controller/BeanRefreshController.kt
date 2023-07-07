@@ -27,7 +27,7 @@ class BeanRefreshController(
             beanRefresher.refresh(
                 BeanRefreshConfig(
                     beanName = request.beanName,
-                    classType = Class.forName(request.classType).kotlin,
+                    classType = Class.forName(request.classType),
                 ),
             )
             ResponseEntity.ok(BeanRefreshResponse(message = "Successfully refreshed bean '${request.beanName}'"))

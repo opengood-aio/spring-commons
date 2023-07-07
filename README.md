@@ -122,6 +122,18 @@ qualified class type to trigger a refresh of a bean without restarting the
 application container. On the next request for dependencies that use the bean,
 the updated instance will be injected.
 
+To enable the `BeanRefresher`, add the following configuration to
+`application.yml`:
+
+```yaml
+spring-commons:
+  bean:
+    refresh:
+      enabled: true
+      controller:
+        enabled: true
+```
+
 A REST controller endpoint is provided to allow programmatic refresh of Spring
 beans:
 
