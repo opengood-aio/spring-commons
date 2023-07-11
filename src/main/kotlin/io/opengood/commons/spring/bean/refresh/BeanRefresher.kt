@@ -1,7 +1,6 @@
 package io.opengood.commons.spring.bean.refresh
 
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshConfig
-import jdk.jfr.Experimental
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.support.BeanDefinitionBuilder
 import org.springframework.beans.factory.support.BeanDefinitionRegistry
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component
 
 @Component
 @ConditionalOnProperty(prefix = "spring-commons.bean.refresh", name = ["enabled"], havingValue = "true")
-@Experimental
 class BeanRefresher(private val applicationContext: ApplicationContext) {
 
     fun <T : Any> refresh(config: BeanRefreshConfig<T>) {

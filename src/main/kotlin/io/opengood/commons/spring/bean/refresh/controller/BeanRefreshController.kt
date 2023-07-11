@@ -4,7 +4,6 @@ import io.opengood.commons.spring.bean.refresh.BeanRefresher
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshConfig
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshRequest
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshResponse
-import jdk.jfr.Experimental
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.http.ResponseEntity
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/spring-commons/bean")
 @ConditionalOnProperty(prefix = "spring-commons.bean.refresh.controller", name = ["enabled"], havingValue = "true")
-@Experimental
 class BeanRefreshController(
     private val beanRefresher: BeanRefresher,
 ) {
