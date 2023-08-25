@@ -21,6 +21,12 @@ class BeanRefresher(private val applicationContext: ApplicationContext) {
                 if (oldBeanDefinition.resolvableType.rawClass == newBeanDefinition.resolvableType.rawClass) {
                     beanRegistry.removeBeanDefinition(config.beanName)
                     beanRegistry.registerBeanDefinition(config.beanName, newBeanDefinition)
+
+                    if (config.recreateBean) {
+                        val beanFactory = applicationContext.autowireCapableBeanFactory
+                        beanFactory.createBean(config.classType)
+                    }
+
                     log.info("Successfully refreshed bean '${config.beanName}' with class type '${config.classType.canonicalName}'")
                 }
             } catch (e: Exception) {

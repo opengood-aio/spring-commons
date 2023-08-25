@@ -133,7 +133,29 @@ spring-commons:
         enabled: true
 ```
 
-A REST controller endpoint is provided to allow programmatic refresh of Spring
+#### Kotlin/Java API
+
+One can use the `BeanRefresher` Kotlin/Java API to programmatically to refresh
+a bean:
+
+```kotlin
+val oldBean = applicationContext.getBean("greetingBean") as GreetingBean
+
+beanRefresher.refresh(
+    BeanRefreshConfig(
+        beanName = "greetingBean",
+        classType = GreetingBean::class.java,
+    )
+)
+
+val newBean = applicationContext.getBean("greetingBean") as GreetingBean
+
+newBean shouldNotBe oldBean
+```
+
+#### REST API
+
+A REST controller endpoint is also provided to allow HTTP(S) refresh of Spring
 beans:
 
 **Request:**
@@ -150,6 +172,31 @@ Content-Type: application/json
 
 ```http request
 {"message":"Successfully refreshed bean 'greetingBean'"}
+```
+
+#### Recreation of Spring Beans
+
+By default, `BeanRefresher` only reloads a Spring bean's definition. Sometimes,
+specific beans need to be recreated. To do so with `BeanRefresher`, add
+`recreateBean = true` to either the `BeanRefresherConfig` or to request JSON,
+for Kotlin/Java API and REST API, respectively.
+
+**Examples:**
+
+```kotlin
+BeanRefreshConfig(
+    beanName = "greetingBean",
+    classType = GreetingBean::class.java,
+    recreateBean = true,
+)
+```
+
+```http request
+POST http://localhost:8080/spring-commons/bean/refresh
+Accept: application/json
+Content-Type: application/json
+
+{"beanName":"greetingBean", "classType":"app.bean.GreetingBean", "recreateBean": true}
 ```
 
 ---
