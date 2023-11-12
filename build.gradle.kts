@@ -4,6 +4,13 @@ plugins {
 
 group = "io.opengood.commons"
 
+val javaVersion = JavaVersion.VERSION_17
+
+java.apply {
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
 opengood {
     artifact {
         description = "Commons library containing reusable patterns, extensions, properties, beans, and objects for Spring and Spring Boot"
