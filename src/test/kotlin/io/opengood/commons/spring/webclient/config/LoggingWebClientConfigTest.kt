@@ -41,7 +41,6 @@ import org.springframework.web.reactive.function.client.WebClient
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
 @AutoConfigureWireMock(port = 0)
 class LoggingWebClientConfigTest : WordSpec() {
-
     @Autowired
     lateinit var wireMockServer: WireMockServer
 
@@ -72,16 +71,17 @@ class LoggingWebClientConfigTest : WordSpec() {
                         ),
                 )
 
-                val response = webClient.get()
-                    .uri { uriBuilder ->
-                        with(uriBuilder) {
-                            path("/greeting")
-                            queryParam("firstName", "John")
-                        }.build()
-                    }
-                    .retrieve()
-                    .bodyToMono(Person::class.java)
-                    .block()
+                val response =
+                    webClient.get()
+                        .uri { uriBuilder ->
+                            with(uriBuilder) {
+                                path("/greeting")
+                                queryParam("firstName", "John")
+                            }.build()
+                        }
+                        .retrieve()
+                        .bodyToMono(Person::class.java)
+                        .block()
 
                 response shouldBe expected
 

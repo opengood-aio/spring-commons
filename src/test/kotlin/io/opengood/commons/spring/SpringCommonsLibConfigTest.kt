@@ -28,7 +28,6 @@ import org.springframework.context.ApplicationContext
     webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 class SpringCommonsLibConfigTest : WordSpec() {
-
     @Autowired
     lateinit var applicationContext: ApplicationContext
 

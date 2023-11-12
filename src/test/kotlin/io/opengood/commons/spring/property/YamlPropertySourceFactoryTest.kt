@@ -10,11 +10,11 @@ import org.springframework.boot.test.context.assertj.AssertableApplicationContex
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
 
 class YamlPropertySourceFactoryTest : WordSpec() {
-
     init {
-        val contextRunner = ApplicationContextRunner()
-            .withUserConfiguration(TestApplication::class.java)
-            .withInitializer(ConfigDataApplicationContextInitializer())
+        val contextRunner =
+            ApplicationContextRunner()
+                .withUserConfiguration(TestApplication::class.java)
+                .withInitializer(ConfigDataApplicationContextInitializer())
 
         "YAML property source factory" should {
             "Parse custom YAML file and load properties bean" {
@@ -24,10 +24,11 @@ class YamlPropertySourceFactoryTest : WordSpec() {
                         with(appProperties) {
                             shouldNotBeNull()
 
-                            properties shouldBe mapOf(
-                                "foo" to "bar",
-                                "baz" to "paz",
-                            )
+                            properties shouldBe
+                                mapOf(
+                                    "foo" to "bar",
+                                    "baz" to "paz",
+                                )
                         }
                     }
             }

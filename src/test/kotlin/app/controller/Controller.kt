@@ -15,19 +15,21 @@ import org.springframework.web.reactive.function.client.WebClient
 class Controller(
     @Qualifier("logExchangeFiltersWebClient") val webClient: WebClient,
 ) {
-
     @GetMapping("/{firstName}")
-    fun greeting(@PathVariable firstName: String): ResponseEntity<Greeting> {
-        val response = webClient.get()
-            .uri { uriBuilder ->
-                with(uriBuilder) {
-                    path("/api/person")
-                        .queryParam("firstName", firstName)
-                }.build()
-            }
-            .retrieve()
-            .bodyToMono(Person::class.java)
-            .block()
+    fun greeting(
+        @PathVariable firstName: String,
+    ): ResponseEntity<Greeting> {
+        val response =
+            webClient.get()
+                .uri { uriBuilder ->
+                    with(uriBuilder) {
+                        path("/api/person")
+                            .queryParam("firstName", firstName)
+                    }.build()
+                }
+                .retrieve()
+                .bodyToMono(Person::class.java)
+                .block()
         return ResponseEntity.ok(Greeting(message = "Hello ${response?.firstName} ${response?.lastName}!"))
     }
 }

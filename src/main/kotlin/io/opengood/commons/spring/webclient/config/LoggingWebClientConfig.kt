@@ -14,7 +14,6 @@ import reactor.netty.transport.logging.AdvancedByteBufFormat
 @AutoConfiguration
 @ConditionalOnProperty(prefix = "spring-commons.web-client.logging", name = ["enabled"], havingValue = "true")
 class LoggingWebClientConfig {
-
     @Bean("loggingHttpClient")
     fun loggingHttpClient(): HttpClient {
         log.info("Setup logging Netty HTTP client")
@@ -23,7 +22,9 @@ class LoggingWebClientConfig {
     }
 
     @Bean("loggingWebClientBuilder")
-    fun loggingWebClientBuilder(@Qualifier("loggingHttpClient") loggingHttpClient: HttpClient): WebClient.Builder {
+    fun loggingWebClientBuilder(
+        @Qualifier("loggingHttpClient") loggingHttpClient: HttpClient,
+    ): WebClient.Builder {
         log.info("Setup logging web client builder")
         return WebClient.builder()
             .clientConnector(ReactorClientHttpConnector(loggingHttpClient))

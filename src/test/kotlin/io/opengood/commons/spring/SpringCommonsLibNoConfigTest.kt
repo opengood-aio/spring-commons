@@ -30,7 +30,6 @@ import org.springframework.test.context.ActiveProfiles
 )
 @ActiveProfiles("none")
 class SpringCommonsLibNoConfigTest : WordSpec() {
-
     @Autowired
     lateinit var applicationContext: ApplicationContext
 

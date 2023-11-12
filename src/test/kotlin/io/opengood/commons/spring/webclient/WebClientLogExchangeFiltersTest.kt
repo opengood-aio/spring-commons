@@ -48,7 +48,6 @@ import test.TestAppender
 @AutoConfigureWireMock(port = 0)
 @AutoConfigureMockMvc
 class WebClientLogExchangeFiltersTest : WordSpec() {
-
     @Value("\${wiremock.server.port}")
     var wireMockServerPort: Int = 0
 

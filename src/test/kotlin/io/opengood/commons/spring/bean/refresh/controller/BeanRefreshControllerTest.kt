@@ -34,7 +34,6 @@ import org.springframework.test.web.servlet.post
 )
 @AutoConfigureMockMvc
 class BeanRefreshControllerTest : WordSpec() {
-
     @MockkBean
     lateinit var beanRefresher: BeanRefresher
 
@@ -53,12 +52,13 @@ class BeanRefreshControllerTest : WordSpec() {
 
                 mockMvc.post("/spring-commons/bean/refresh") {
                     contentType = MediaType.APPLICATION_JSON
-                    content = objectMapper.writeValueAsString(
-                        BeanRefreshRequest(
-                            beanName = "greetingBean",
-                            classType = GreetingBean::class.java.canonicalName,
-                        ),
-                    )
+                    content =
+                        objectMapper.writeValueAsString(
+                            BeanRefreshRequest(
+                                beanName = "greetingBean",
+                                classType = GreetingBean::class.java.canonicalName,
+                            ),
+                        )
                     accept = MediaType.APPLICATION_JSON
                 }
                     .andDo { print() }
@@ -76,12 +76,13 @@ class BeanRefreshControllerTest : WordSpec() {
 
                 mockMvc.post("/spring-commons/bean/refresh") {
                     contentType = MediaType.APPLICATION_JSON
-                    content = objectMapper.writeValueAsString(
-                        BeanRefreshRequest(
-                            beanName = "greetingBean",
-                            classType = GreetingBean::class.java.canonicalName,
-                        ),
-                    )
+                    content =
+                        objectMapper.writeValueAsString(
+                            BeanRefreshRequest(
+                                beanName = "greetingBean",
+                                classType = GreetingBean::class.java.canonicalName,
+                            ),
+                        )
                     accept = MediaType.APPLICATION_JSON
                 }
                     .andDo { print() }

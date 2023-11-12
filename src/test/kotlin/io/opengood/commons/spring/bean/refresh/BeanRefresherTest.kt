@@ -23,7 +23,6 @@ import org.springframework.context.ApplicationContext
     properties = [SpringBean.BEAN_OVERRIDE],
 )
 class BeanRefresherTest : WordSpec() {
-
     @Autowired
     lateinit var applicationContext: ApplicationContext
 
@@ -37,11 +36,12 @@ class BeanRefresherTest : WordSpec() {
             "Refresh Spring bean and not recreate bean with updated configuration" {
                 val oldBean = applicationContext.getBean("greetingBean") as GreetingBean
 
-                val config = BeanRefreshConfig(
-                    beanName = "greetingBean",
-                    classType = GreetingBean::class.java,
-                    recreateBean = false,
-                )
+                val config =
+                    BeanRefreshConfig(
+                        beanName = "greetingBean",
+                        classType = GreetingBean::class.java,
+                        recreateBean = false,
+                    )
 
                 beanRefresher.refresh(config)
 
@@ -53,11 +53,12 @@ class BeanRefresherTest : WordSpec() {
             "Not refresh Spring bean and not recreate bean when bean does not exist" {
                 val oldBean = applicationContext.getBean("greetingBean") as GreetingBean
 
-                val config = BeanRefreshConfig(
-                    beanName = "greetingBean1",
-                    classType = String::class.java,
-                    recreateBean = false,
-                )
+                val config =
+                    BeanRefreshConfig(
+                        beanName = "greetingBean1",
+                        classType = String::class.java,
+                        recreateBean = false,
+                    )
 
                 beanRefresher.refresh(config)
 
@@ -69,11 +70,12 @@ class BeanRefresherTest : WordSpec() {
             "Not refresh Spring bean and and not recreate bean when new bean class type is not same as existing bean class type" {
                 val oldBean = applicationContext.getBean("greetingBean")
 
-                val config = BeanRefreshConfig(
-                    beanName = "greetingBean",
-                    classType = SpringBean::class.java,
-                    recreateBean = false,
-                )
+                val config =
+                    BeanRefreshConfig(
+                        beanName = "greetingBean",
+                        classType = SpringBean::class.java,
+                        recreateBean = false,
+                    )
 
                 beanRefresher.refresh(config)
 
@@ -85,11 +87,12 @@ class BeanRefresherTest : WordSpec() {
             "Refresh Spring bean and recreate bean with updated configuration" {
                 val oldBean = applicationContext.getBean("greetingBean") as GreetingBean
 
-                val config = BeanRefreshConfig(
-                    beanName = "greetingBean",
-                    classType = GreetingBean::class.java,
-                    recreateBean = true,
-                )
+                val config =
+                    BeanRefreshConfig(
+                        beanName = "greetingBean",
+                        classType = GreetingBean::class.java,
+                        recreateBean = true,
+                    )
 
                 beanRefresher.refresh(config)
 
@@ -101,11 +104,12 @@ class BeanRefresherTest : WordSpec() {
             "Not refresh Spring bean and not recreate bean when bean does not exist" {
                 val oldBean = applicationContext.getBean("greetingBean") as GreetingBean
 
-                val config = BeanRefreshConfig(
-                    beanName = "greetingBean1",
-                    classType = String::class.java,
-                    recreateBean = true,
-                )
+                val config =
+                    BeanRefreshConfig(
+                        beanName = "greetingBean1",
+                        classType = String::class.java,
+                        recreateBean = true,
+                    )
 
                 beanRefresher.refresh(config)
 
@@ -117,11 +121,12 @@ class BeanRefresherTest : WordSpec() {
             "Not refresh Spring bean and and not recreate bean when new bean class type is not same as existing bean class type" {
                 val oldBean = applicationContext.getBean("greetingBean")
 
-                val config = BeanRefreshConfig(
-                    beanName = "greetingBean",
-                    classType = SpringBean::class.java,
-                    recreateBean = true,
-                )
+                val config =
+                    BeanRefreshConfig(
+                        beanName = "greetingBean",
+                        classType = SpringBean::class.java,
+                        recreateBean = true,
+                    )
 
                 beanRefresher.refresh(config)
 

@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RestController
 class BeanRefreshController(
     private val beanRefresher: BeanRefresher,
 ) {
-
     @PostMapping("/refresh")
-    fun refresh(@RequestBody request: BeanRefreshRequest): ResponseEntity<BeanRefreshResponse> {
+    fun refresh(
+        @RequestBody request: BeanRefreshRequest,
+    ): ResponseEntity<BeanRefreshResponse> {
         return try {
             beanRefresher.refresh(
                 BeanRefreshConfig(
