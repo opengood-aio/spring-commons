@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/opengoodio/spring-commons/workflows/build/badge.svg)](https://github.com/opengoodio/spring-commons/actions?query=workflow%3Abuild)
 [![Release](https://github.com/opengoodio/spring-commons/workflows/release/badge.svg)](https://github.com/opengoodio/spring-commons/actions?query=workflow%3Arelease)
+[![CodeQL](https://github.com/opengoodio/spring-commons/actions/workflows/codeql.yml/badge.svg)](https://github.com/opengoodio/spring-commons/actions/workflows/codeql.yml)
 [![Codecov](https://codecov.io/gh/opengoodio/spring-commons/branch/main/graph/badge.svg?token=AEEYTGK87F)](https://codecov.io/gh/opengoodio/spring-commons)
 [![Release Version](https://img.shields.io/github/release/opengoodio/spring-commons.svg)](https://github.com/opengoodio/spring-commons/releases/latest)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons)
