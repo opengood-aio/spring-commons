@@ -65,7 +65,13 @@ class BeanRefreshControllerTest : WordSpec() {
                     .andExpect {
                         status { isOk() }
                         content { contentType(MediaType.APPLICATION_JSON) }
-                        content { json(objectMapper.writeValueAsString(BeanRefreshResponse(message = "Successfully refreshed bean 'greetingBean'"))) }
+                        content {
+                            json(
+                                objectMapper.writeValueAsString(
+                                    BeanRefreshResponse(message = "Successfully refreshed bean 'greetingBean'"),
+                                ),
+                            )
+                        }
                     }
 
                 verify { beanRefresher.refresh(any<BeanRefreshConfig<GreetingBean>>()) }
@@ -89,7 +95,13 @@ class BeanRefreshControllerTest : WordSpec() {
                     .andExpect {
                         status { isBadRequest() }
                         content { contentType(MediaType.APPLICATION_JSON) }
-                        content { json(objectMapper.writeValueAsString(BeanRefreshResponse(message = "Unable to refresh bean 'greetingBean'"))) }
+                        content {
+                            json(
+                                objectMapper.writeValueAsString(
+                                    BeanRefreshResponse(message = "Unable to refresh bean 'greetingBean'"),
+                                ),
+                            )
+                        }
                     }
 
                 verify { beanRefresher.refresh(any<BeanRefreshConfig<GreetingBean>>()) }
