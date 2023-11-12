@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - .github/workflows/analyze.yml
       - .github/workflows/cancel.yml
+      - .github/workflows/codeql.yml
       - .github/workflows/release.yml
       - .gitignore
       - gradle.properties
