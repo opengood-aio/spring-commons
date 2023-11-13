@@ -5,15 +5,15 @@ import app.config.TestAppConfig
 import app.config.TestWebClientConfig
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
-import io.kotest.matchers.booleans.shouldBeTrue
+import io.kotest.matchers.booleans.shouldBeFalse
 import io.opengood.commons.spring.bean.refresh.BeanRefresher
 import io.opengood.commons.spring.bean.refresh.controller.BeanRefreshController
-import io.opengood.commons.spring.constant.SpringBean
 import io.opengood.commons.spring.webclient.config.LoggingWebClientConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.context.ApplicationContext
+import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest(
     classes = [
@@ -24,10 +24,10 @@ import org.springframework.context.ApplicationContext
         TestApplication::class,
         TestWebClientConfig::class,
     ],
-    properties = [SpringBean.BEAN_OVERRIDE],
     webEnvironment = WebEnvironment.RANDOM_PORT,
 )
-class SpringCommonsLibConfigTest : WordSpec() {
+@ActiveProfiles("none")
+class SpringCommonsNoConfigTest : WordSpec() {
     @Autowired
     lateinit var applicationContext: ApplicationContext
 
@@ -35,11 +35,11 @@ class SpringCommonsLibConfigTest : WordSpec() {
 
     init {
         "Spring Commons configuration" should {
-            "Configure Spring beans when properties are populated in application configuration" {
-                applicationContext.containsBean("beanRefreshController").shouldBeTrue()
-                applicationContext.containsBean("beanRefresher").shouldBeTrue()
-                applicationContext.containsBean("loggingHttpClient").shouldBeTrue()
-                applicationContext.containsBean("loggingWebClientBuilder").shouldBeTrue()
+            "Not configure Spring beans when properties are not populated in application configuration" {
+                applicationContext.containsBean("beanRefreshController").shouldBeFalse()
+                applicationContext.containsBean("beanRefresher").shouldBeFalse()
+                applicationContext.containsBean("loggingHttpClient").shouldBeFalse()
+                applicationContext.containsBean("loggingWebClientBuilder").shouldBeFalse()
             }
         }
     }

@@ -14,7 +14,6 @@ import io.opengood.commons.spring.bean.refresh.BeanRefresher
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshConfig
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshRequest
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshResponse
-import io.opengood.commons.spring.constant.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -29,7 +28,6 @@ import org.springframework.test.web.servlet.post
         TestAppConfig::class,
         TestApplication::class,
     ],
-    properties = [SpringBean.BEAN_OVERRIDE],
     webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 @AutoConfigureMockMvc

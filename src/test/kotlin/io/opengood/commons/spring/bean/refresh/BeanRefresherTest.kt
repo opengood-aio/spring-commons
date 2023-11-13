@@ -2,13 +2,13 @@ package io.opengood.commons.spring.bean.refresh
 
 import app.TestApplication
 import app.bean.GreetingBean
+import app.config.TestAppConfig
 import app.config.TestBeanConfig
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.opengood.commons.spring.bean.refresh.model.BeanRefreshConfig
-import io.opengood.commons.spring.constant.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationContext
@@ -20,7 +20,6 @@ import org.springframework.context.ApplicationContext
         TestApplication::class,
         TestBeanConfig::class,
     ],
-    properties = [SpringBean.BEAN_OVERRIDE],
 )
 class BeanRefresherTest : WordSpec() {
     @Autowired
@@ -73,7 +72,7 @@ class BeanRefresherTest : WordSpec() {
                 val config =
                     BeanRefreshConfig(
                         beanName = "greetingBean",
-                        classType = SpringBean::class.java,
+                        classType = TestAppConfig::class.java,
                         recreateBean = false,
                     )
 
@@ -124,7 +123,7 @@ class BeanRefresherTest : WordSpec() {
                 val config =
                     BeanRefreshConfig(
                         beanName = "greetingBean",
-                        classType = SpringBean::class.java,
+                        classType = TestAppConfig::class.java,
                         recreateBean = true,
                     )
 

@@ -19,7 +19,6 @@ import io.kotest.assertions.assertSoftly
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.collections.shouldContainAnyOf
-import io.opengood.commons.spring.constant.SpringBean
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -41,7 +40,6 @@ import test.TestAppender
         TestWebClientConfig::class,
         WireMockServer::class,
     ],
-    properties = [SpringBean.BEAN_OVERRIDE],
     webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])

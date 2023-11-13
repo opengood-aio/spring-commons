@@ -16,7 +16,6 @@ import com.github.tomakehurst.wiremock.client.WireMock.verify
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
-import io.opengood.commons.spring.constant.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
@@ -35,7 +34,6 @@ import org.springframework.web.reactive.function.client.WebClient
         TestWebClientConfig::class,
         WireMockServer::class,
     ],
-    properties = [SpringBean.BEAN_OVERRIDE],
     webEnvironment = WebEnvironment.RANDOM_PORT,
 )
 @TestPropertySource(properties = ["api.base-uri=http://localhost:\${wiremock.server.port}"])
