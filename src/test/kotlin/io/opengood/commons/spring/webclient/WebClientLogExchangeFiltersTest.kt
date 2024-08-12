@@ -87,7 +87,8 @@ class WebClientLogExchangeFiltersTest : WordSpec() {
                         ),
                 )
 
-                mockMvc.get("/greeting/John")
+                mockMvc
+                    .get("/greeting/John")
                     .andDo { print() }
                     .andExpect {
                         status { isOk() }

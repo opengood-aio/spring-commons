@@ -17,14 +17,14 @@ class TestWebClientConfig(
 ) {
     @Bean
     fun logExchangeFiltersWebClient() =
-        WebClient.builder()
+        WebClient
+            .builder()
             .baseUrl(apiBaseUri)
             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .filters { exchangeFilterFunctions ->
                 exchangeFilterFunctions.add(logRequest(log))
                 exchangeFilterFunctions.add(logResponse(log))
-            }
-            .build()
+            }.build()
 
     @Bean
     fun loggingWebClient(

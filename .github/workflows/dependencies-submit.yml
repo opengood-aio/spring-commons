@@ -1,4 +1,4 @@
-name: CodeQL
+name: dependencies-submit
 
 on:
   pull_request:
@@ -15,7 +15,5 @@ on:
       - README.md
 
 jobs:
-  build:
-    uses: opengood-aio/central-workflows/.github/workflows/codeql-analyze.yml@main
-    with:
-      java-version: 21
+  dependencies-submit:
+    uses: opengood-aio/central-workflows/.github/workflows/gradle-dependencies-submit.yml@main

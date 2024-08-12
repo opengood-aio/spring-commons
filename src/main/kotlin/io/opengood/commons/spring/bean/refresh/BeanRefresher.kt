@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component
 
 @Component
 @ConditionalOnProperty(prefix = "spring-commons.bean.refresh", name = ["enabled"], havingValue = "true")
-class BeanRefresher(private val applicationContext: ApplicationContext) {
+class BeanRefresher(
+    private val applicationContext: ApplicationContext,
+) {
     fun <T : Any> refresh(config: BeanRefreshConfig<T>) {
         val beanRegistry = applicationContext.autowireCapableBeanFactory as BeanDefinitionRegistry
         if (beanRegistry.containsBeanDefinition(config.beanName)) {

@@ -20,14 +20,14 @@ class Controller(
         @PathVariable firstName: String,
     ): ResponseEntity<Greeting> {
         val response =
-            webClient.get()
+            webClient
+                .get()
                 .uri { uriBuilder ->
                     with(uriBuilder) {
                         path("/api/person")
                             .queryParam("firstName", firstName)
                     }.build()
-                }
-                .retrieve()
+                }.retrieve()
                 .bodyToMono(Person::class.java)
                 .block()
         return ResponseEntity.ok(Greeting(message = "Hello ${response?.firstName} ${response?.lastName}!"))

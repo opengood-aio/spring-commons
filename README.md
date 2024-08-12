@@ -7,14 +7,13 @@
 [![Release Version](https://img.shields.io/github/release/opengoodio/spring-commons.svg)](https://github.com/opengoodio/spring-commons/releases/latest)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengoodio/spring-commons/master/LICENSE)
-[![FOSSA](https://app.fossa.com/api/projects/custom%2B22161%2Fgithub.com%2Fopengoodio%2Fspring-commons.svg?type=small)](https://app.fossa.com/projects/custom%2B22161%2Fgithub.com%2Fopengoodio%2Fspring-commons?ref=badge_small)
 
 Commons library containing reusable patterns, extensions, properties, beans, and
 objects for Spring and Spring Boot
 
 ## Compatibility
 
-* Java 17
+* Java 21
 * Spring Boot 3
 
 ## Setup
