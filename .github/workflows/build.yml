@@ -3,23 +3,19 @@ name: build
 on:
   push:
     branches:
-      - main
+      - '**'
+      - '!main'
     paths-ignore:
-      - .github/workflows/cancel.yml
-      - .github/workflows/codeql.yml
-      - .github/workflows/release.yml
+      - .github/workflows/*
       - .gitignore
       - gradle.properties
       - LICENSE
       - README.md
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
-    uses: opengoodio/central-workflows/.github/workflows/gradle-lib-build.yml@main
+    uses: opengood-aio/central-workflows/.github/workflows/gradle-lib-build.yml@main
     with:
       run-gradle-validation: true
     secrets:
-      fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
