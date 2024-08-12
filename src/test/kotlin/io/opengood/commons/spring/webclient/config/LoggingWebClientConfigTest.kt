@@ -70,14 +70,14 @@ class LoggingWebClientConfigTest : WordSpec() {
                 )
 
                 val response =
-                    webClient.get()
+                    webClient
+                        .get()
                         .uri { uriBuilder ->
                             with(uriBuilder) {
                                 path("/greeting")
                                 queryParam("firstName", "John")
                             }.build()
-                        }
-                        .retrieve()
+                        }.retrieve()
                         .bodyToMono(Person::class.java)
                         .block()
 

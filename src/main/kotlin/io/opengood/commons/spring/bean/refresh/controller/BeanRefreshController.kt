@@ -21,8 +21,8 @@ class BeanRefreshController(
     @PostMapping("/refresh")
     fun refresh(
         @RequestBody request: BeanRefreshRequest,
-    ): ResponseEntity<BeanRefreshResponse> {
-        return try {
+    ): ResponseEntity<BeanRefreshResponse> =
+        try {
             beanRefresher.refresh(
                 BeanRefreshConfig(
                     beanName = request.beanName,
@@ -36,7 +36,6 @@ class BeanRefreshController(
             log.error(message, e)
             ResponseEntity.badRequest().body(BeanRefreshResponse(message = message))
         }
-    }
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")

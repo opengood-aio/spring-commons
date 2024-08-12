@@ -17,7 +17,8 @@ class LoggingWebClientConfig {
     @Bean("loggingHttpClient")
     fun loggingHttpClient(): HttpClient {
         log.info("Setup logging Netty HTTP client")
-        return HttpClient.create()
+        return HttpClient
+            .create()
             .wiretap("reactor.netty.http.client.HttpClient", LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)
     }
 
@@ -26,7 +27,8 @@ class LoggingWebClientConfig {
         @Qualifier("loggingHttpClient") loggingHttpClient: HttpClient,
     ): WebClient.Builder {
         log.info("Setup logging web client builder")
-        return WebClient.builder()
+        return WebClient
+            .builder()
             .clientConnector(ReactorClientHttpConnector(loggingHttpClient))
     }
 

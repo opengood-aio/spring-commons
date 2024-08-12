@@ -48,18 +48,18 @@ class BeanRefreshControllerTest : WordSpec() {
             "Send request to API endpoint and refresh Spring bean and return successful response" {
                 justRun { beanRefresher.refresh(any<BeanRefreshConfig<GreetingBean>>()) }
 
-                mockMvc.post("/spring-commons/bean/refresh") {
-                    contentType = MediaType.APPLICATION_JSON
-                    content =
-                        objectMapper.writeValueAsString(
-                            BeanRefreshRequest(
-                                beanName = "greetingBean",
-                                classType = GreetingBean::class.java.canonicalName,
-                            ),
-                        )
-                    accept = MediaType.APPLICATION_JSON
-                }
-                    .andDo { print() }
+                mockMvc
+                    .post("/spring-commons/bean/refresh") {
+                        contentType = MediaType.APPLICATION_JSON
+                        content =
+                            objectMapper.writeValueAsString(
+                                BeanRefreshRequest(
+                                    beanName = "greetingBean",
+                                    classType = GreetingBean::class.java.canonicalName,
+                                ),
+                            )
+                        accept = MediaType.APPLICATION_JSON
+                    }.andDo { print() }
                     .andExpect {
                         status { isOk() }
                         content { contentType(MediaType.APPLICATION_JSON) }
@@ -78,18 +78,18 @@ class BeanRefreshControllerTest : WordSpec() {
             "Send request to API endpoint and not refresh Spring bean when exception is thrown and return error response" {
                 every { beanRefresher.refresh(any<BeanRefreshConfig<GreetingBean>>()) } throws Exception("Error occurred")
 
-                mockMvc.post("/spring-commons/bean/refresh") {
-                    contentType = MediaType.APPLICATION_JSON
-                    content =
-                        objectMapper.writeValueAsString(
-                            BeanRefreshRequest(
-                                beanName = "greetingBean",
-                                classType = GreetingBean::class.java.canonicalName,
-                            ),
-                        )
-                    accept = MediaType.APPLICATION_JSON
-                }
-                    .andDo { print() }
+                mockMvc
+                    .post("/spring-commons/bean/refresh") {
+                        contentType = MediaType.APPLICATION_JSON
+                        content =
+                            objectMapper.writeValueAsString(
+                                BeanRefreshRequest(
+                                    beanName = "greetingBean",
+                                    classType = GreetingBean::class.java.canonicalName,
+                                ),
+                            )
+                        accept = MediaType.APPLICATION_JSON
+                    }.andDo { print() }
                     .andExpect {
                         status { isBadRequest() }
                         content { contentType(MediaType.APPLICATION_JSON) }
