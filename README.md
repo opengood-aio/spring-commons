@@ -1,12 +1,12 @@
 # Spring Commons Library
 
-[![Build](https://github.com/opengoodio/spring-commons/workflows/build/badge.svg)](https://github.com/opengoodio/spring-commons/actions?query=workflow%3Abuild)
-[![Release](https://github.com/opengoodio/spring-commons/workflows/release/badge.svg)](https://github.com/opengoodio/spring-commons/actions?query=workflow%3Arelease)
-[![CodeQL](https://github.com/opengoodio/spring-commons/actions/workflows/codeql.yml/badge.svg)](https://github.com/opengoodio/spring-commons/actions/workflows/codeql.yml)
-[![Codecov](https://codecov.io/gh/opengoodio/spring-commons/branch/main/graph/badge.svg?token=AEEYTGK87F)](https://codecov.io/gh/opengoodio/spring-commons)
-[![Release Version](https://img.shields.io/github/release/opengoodio/spring-commons.svg)](https://github.com/opengoodio/spring-commons/releases/latest)
+[![Build](https://github.com/opengood-aio/spring-commons/workflows/build/badge.svg)](https://github.com/opengood-aio/spring-commons/actions?query=workflow%3Abuild)
+[![Release](https://github.com/opengood-aio/spring-commons/workflows/release/badge.svg)](https://github.com/opengood-aio/spring-commons/actions?query=workflow%3Arelease)
+[![CodeQL](https://github.com/opengood-aio/spring-commons/actions/workflows/codeql.yml/badge.svg)](https://github.com/opengood-aio/spring-commons/actions/workflows/codeql.yml)
+[![Codecov](https://codecov.io/gh/opengood-aio/spring-commons/branch/main/graph/badge.svg?token=AEEYTGK87F)](https://codecov.io/gh/opengood-aio/spring-commons)
+[![Release Version](https://img.shields.io/github/release/opengood-aio/spring-commons.svg)](https://github.com/opengood-aio/spring-commons/releases/latest)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengoodio/spring-commons/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengood-aio/spring-commons/master/LICENSE)
 
 Commons library containing reusable patterns, extensions, properties, beans, and
 objects for Spring and Spring Boot
