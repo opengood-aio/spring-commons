@@ -5,7 +5,7 @@
 [![CodeQL](https://github.com/opengood-aio/spring-commons/actions/workflows/codeql.yml/badge.svg)](https://github.com/opengood-aio/spring-commons/actions/workflows/codeql.yml)
 [![Codecov](https://codecov.io/gh/opengood-aio/spring-commons/branch/main/graph/badge.svg?token=AEEYTGK87F)](https://codecov.io/gh/opengood-aio/spring-commons)
 [![Release Version](https://img.shields.io/github/release/opengood-aio/spring-commons.svg)](https://github.com/opengood-aio/spring-commons/releases/latest)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.opengood.commons/spring-commons)
+[![Maven Central](https://img.shields.io/maven-central/v/io.opengood.commons/spring-commons.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.opengood.commons%22%20AND%20a:%22spring-commons%22)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/opengood-aio/spring-commons/master/LICENSE)
 
 Commons library containing reusable patterns, extensions, properties, beans, and
