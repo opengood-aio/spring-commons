@@ -16,6 +16,7 @@ jobs:
   build:
     uses: opengood-aio/central-workflows/.github/workflows/gradle-lib-build.yml@main
     with:
+      run-code-coverage: true
       run-gradle-validation: true
     secrets:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
